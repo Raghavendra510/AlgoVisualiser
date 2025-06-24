@@ -1,2 +1,2 @@
 # AlgoVisualiser
-visual representation of basic sorting algorithms
+Step by step visual representation of some sorting algorithms 
