@@ -266,6 +266,40 @@ async function cycleSort() {
     renderArray([], Array.from({ length: n }, (_, k) => k));
 }
 
+async function radixSort() {
+    let arr = array.slice();
+    let n = arr.length;
+    let max = Math.max(...arr);
+    let exp = 1;
+    while (Math.floor(max / exp) > 0) {
+        let output = Array(n).fill(0);
+        let count = Array(10).fill(0);
+        for (let i = 0; i < n; i++) {
+            let digit = Math.floor(arr[i] / exp) % 10;
+            count[digit]++;
+            renderArray([i], []);
+            await sleep(10);
+        }
+        for (let i = 1; i < 10; i++) {
+            count[i] += count[i - 1];
+        }
+        for (let i = n - 1; i >= 0; i--) {
+            let digit = Math.floor(arr[i] / exp) % 10;
+            output[count[digit] - 1] = arr[i];
+            count[digit]--;
+            renderArray([i], []);
+            await sleep(10);
+        }
+        for (let i = 0; i < n; i++) {
+            arr[i] = output[i];
+            array = arr.slice();
+            renderArray([i], Array.from({ length: i + 1 }, (_, k) => k));
+            await sleep(5);
+        }
+        exp *= 10;
+    }
+    renderArray([], Array.from({ length: n }, (_, k) => k));
+}
 function setAlgoStatus(algoName, timeMs = null) {
     if (!algoNameSpan || !algoTimeSpan) return;
     algoNameSpan.textContent = `Algorithm: ${algoName}`;
