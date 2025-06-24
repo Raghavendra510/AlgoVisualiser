@@ -1,0 +1,301 @@
+body {
+    background: #1f1f1f;
+
+
+    color: #fff;
+    font-family: 'Inter', sans-serif;
+    /* Using Inter font */
+    text-align: center;
+    padding: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    /* Changed from flex-start to center for vertical centering */
+    margin: 0;
+    overflow-x: hidden;
+    /* Prevent horizontal scroll */
+}
+
+h1 {
+    margin-top: 25px;
+    margin-bottom: 24px;
+    font-size: 2.5em;
+    /* Slightly larger for better prominence */
+    text-align: center;
+    width: auto;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    color: #7289da;
+    /* Discord blue for accent */
+    font-family: 'Bebas Neue';
+    font-size: 100px;
+    font-weight: bold;
+    letter-spacing: 2px;
+}
+
+#controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 24px;
+    flex-wrap: wrap;
+    /* Allow controls to wrap on smaller screens */
+    gap: 16px;
+    /* Space between buttons */
+}
+
+#controls button {
+    background: #5865f2;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    padding: 10px 18px;
+    margin: 0 8px 8px 0;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+    min-width: 120px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
+}
+
+#controls button:hover,
+#controls button:focus {
+    background: #4752c4;
+    transform: translateY(-2px) scale(1.05);
+    box-shadow: 0 4px 12px rgba(88, 101, 242, 0.25);
+    outline: none;
+}
+
+#controls button:active {
+    transform: scale(0.98);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.18);
+}
+
+#arrayContainer {
+    display: flex;
+    align-items: flex-end;
+    /* Align bars to the bottom */
+    justify-content: center;
+    height: 320px;
+    width: 90vw;
+    max-width: 900px;
+    margin: 0 auto 32px auto;
+    /* Centering horizontally with auto margins */
+    background: #313338;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    /* Enhanced shadow */
+    padding: 24px 0;
+    overflow: hidden;
+    /* Hide overflow if bars exceed width */
+    position: relative;
+}
+
+#arrayContainer svg {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    height: 100%;
+}
+
+
+.bar.active {
+    background: #a82d2d;
+    box-shadow: 0 0 15px rgba(168, 45, 45, 0.7);
+    /* Glow effect */
+}
+
+.bar.sorted {
+    background: #43b581;
+    /* Green for sorted */
+    box-shadow: 0 0 15px rgba(67, 181, 129, 0.7);
+    /* Glow effect */
+}
+
+/* Button Styling */
+.btn {
+    background-color: #7289da;
+    /* Discord blue */
+    color: white;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1em;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.btn:hover {
+    background-color: #677eb4;
+    transform: translateY(-2px);
+}
+
+.btn:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Log area styling */
+.algo-log {
+    margin: 18px auto 0 auto;
+    padding: 16px 32px;
+    background: #23272a;
+    color: #fff;
+    border-radius: 8px;
+    font-size: 1.2em;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 32px;
+    min-width: 300px;
+    max-width: 500px;
+}
+
+#algoStatus {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 32px;
+    margin: 22px auto 0 auto;
+    padding: 18px 32px;
+    background: #23272a;
+    border-radius: 12px;
+    box-shadow: 0 2px 12px rgba(40, 42, 54, 0.18);
+    font-size: 1.35em;
+    font-family: 'Bebas Neue', 'Inter', sans-serif;
+    width: fit-content;
+    min-width: 340px;
+}
+
+#algoName {
+    color: #43b581;
+    font-weight: bold;
+    font-size: 1.2em;
+    letter-spacing: 1px;
+    margin-right: 18px;
+    font-family: 'Bebas Neue', 'Inter', sans-serif;
+}
+
+#algoTime {
+    color: #7289da;
+    font-weight: bold;
+    font-size: 1.1em;
+    letter-spacing: 1px;
+    min-width: 120px;
+    font-family: 'Consolas', monospace;
+}
+
+.loading-dots {
+    /* display: inline-block; */
+    width: 1.5em;
+    text-align: left;
+    animation: blink 1s steps(3, end) infinite;
+}
+
+@keyframes blink {
+
+    0%,
+    100% {
+        color: #7289da;
+    }
+
+    50% {
+        color: #43b581;
+    }
+}
+
+/* Loading dots animation */
+.loading-dots::after {
+    content: '';
+    display: inline-block;
+    width: 1em;
+    text-align: left;
+    animation: dots 1s steps(3, end) infinite;
+}
+
+@keyframes dots {
+
+    0%,
+    20% {
+        content: '';
+    }
+
+    40% {
+        content: '.';
+    }
+
+    60% {
+        content: '..';
+    }
+
+    80%,
+    100% {
+        content: '...';
+    }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    h1 {
+        font-size: 2em;
+        margin-top: 24px;
+    }
+
+    #arrayContainer {
+        height: 250px;
+        width: 95vw;
+        padding: 16px 0;
+    }
+
+    .bar {
+        width: 18px;
+        /* Smaller bars on smaller screens */
+        margin: 0 1px;
+    }
+
+    #controls {
+        flex-direction: column;
+        /* Stack buttons vertically */
+        gap: 10px;
+    }
+
+    #controls button {
+        width: 90vw;
+        min-width: 0;
+        font-size: 1.1em;
+        margin: 0 0 10px 0;
+        padding: 14px 0;
+    }
+
+    .btn {
+        width: 80%;
+        /* Make buttons wider on small screens */
+    }
+}
+
+@media (max-width: 480px) {
+    h1 {
+        font-size: 1.8em;
+        margin-top: 16px;
+    }
+
+    #arrayContainer {
+        height: 200px;
+    }
+
+    .bar {
+        width: 12px;
+        /* Even smaller bars */
+    }
+
+    #controls button {
+        font-size: 1em;
+        padding: 12px 0;
+    }
+}
